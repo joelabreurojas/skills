@@ -21,6 +21,18 @@ An operation that produces the same result whether called once or multiple times
 ### Vertical Slice
 A single path through the system that delivers user-visible value. Unlike horizontal slices (all tests then all code), vertical slices deliver one complete behavior at a time: test → implement → repeat.
 
+### Squash Merge
+A merge strategy that compresses all commits on a feature branch into a single, clean commit on `main`. The final commit includes the PR ID for traceability. The branch is deleted automatically after merge. Keeps history linear, clean, and bisectable.
+
+### Stacked PR
+A PR that targets another open PR's branch instead of `main`. Used when a task depends on unfinished work in another PR. Allows reviewers to see only the relevant diff for their specific task.
+
+### Stacked Branch
+A branch created off an active feature branch instead of `main` when a task depends on unfinished work in the parent branch. Each stacked branch produces its own PR but targets the immediate parent branch, not `main`.
+
+### Breaking Change
+A change that requires consumers to update their code. In SemVer, signaled by a MAJOR version bump. In commits, marked with `!` suffix (e.g., `feat!:` or `fix!:`). Must be documented in the CHANGELOG with migration instructions.
+
 ---
 
 ## Architecture & Design
@@ -45,6 +57,15 @@ A "Plan B" for critical path failures. If a non-essential service fails, the sys
 ### Dependency Boundary
 Explicit rules in an RFD defining which modules may communicate and which imports are prohibited. Prevents circular dependencies and "spaghetti" coupling.
 
+### Mermaid
+A markdown-compatible diagramming language used in RFDs and ADRs to visualize architecture, flows, and state machines. Diagrams are rendered inline by GitHub and other markdown renderers.
+
+### Data Contract
+A shared type definition for data flowing between backend and frontend. Defined in the RFD interface section. View specs reference RFD data contracts rather than inventing their own shapes. Prevents drift between what the UI expects and what the API provides.
+
+### Traceability
+A bi-directional link between artifacts across the documentation hierarchy. Every user story links to a business goal. Every RFD section traces back to a PRD story. Every view file references a story ID. An artifact without traceability has no justification.
+
 ---
 
 ## Security
@@ -60,6 +81,9 @@ For cloud deployments, use OIDC trust relationships instead of long-lived, stati
 
 ### Supply Chain Security
 Defending against attacks that compromise open-source dependencies rather than your code directly. Mitigated via Dependabot/Renovate for automated updates, security advisory monitoring, and SAST (CodeQL) in CI.
+
+### OWASP Top 10
+The Open Web Application Security Project's list of the ten most critical web application security risks. Used as a baseline for security reviews and threat modeling. Includes categories like Injection, Broken Authentication, and XSS.
 
 ---
 
@@ -83,6 +107,9 @@ Tests must never depend on execution order or data left by previous tests. Each 
 ### TDD (Test-Driven Development)
 Write a failing test before writing the implementation. Mandatory for bug fixes: reproduce the bug with a failing test, then fix until green. Encouraged but not strictly required for features.
 
+### Acceptance Criteria
+Objective, testable conditions that define when a user story or issue is complete. Each criterion must be pass/fail — if you cannot write a test for it, rewrite until you can.
+
 ---
 
 ## Versioning & Releases
@@ -95,6 +122,15 @@ A human-readable log of all notable changes, organized by version. The "Unreleas
 
 ### Conventional Commits
 Commit message format: `type(scope): subject`. Types include `feat`, `fix`, `chore`, `docs`, `refactor`, `test`, `ci`. Title ≤50 chars. Body explains *why*, not *how*.
+
+### Scope
+In the context of Conventional Commits, the optional `(scope)` portion of a commit message that identifies the module or area affected by the change. Written in lowercase kebab-case (e.g., `feat(auth):`). Provides additional context for changelog generation.
+
+### Git Tag
+A named reference to a specific commit, typically used to mark release points. Tags follow the version number format (e.g., `v1.2.3`). Signed tags are preferred for verified releases.
+
+### GitHub Release
+A release object created from a Git tag that includes release notes, compiled assets, and changelog entries. Published from the Releases tab in the GitHub UI or via CLI with `gh release create`.
 
 ---
 
@@ -114,3 +150,64 @@ A numeric ordering assigned to issues/tasks that defines the sequence of impleme
 
 ### Pipeline
 The automated CI/CD system that validates code via linting, type checking, security scanning, and testing. The pipeline is the gatekeeper — no code reaches `main` unless all checks are green.
+
+### Milestone
+A high-level epic representing the complete development of a single business module or core feature set (e.g., User Management, Billing, Analytics). Domain-based, not time-based. Groups related issues into a coherent delivery unit with a shared Definition of Done.
+
+### Epic
+A large body of work that can be broken down into smaller, independently executable issues. Used interchangeably with Milestone in this context. Must have a clear scope boundary — if it covers multiple business domains, split it.
+
+### Definition of Done (DoD)
+The completion contract for a milestone or issue. Defines what "finished" means across functional outcome, vertical slice completeness, technical integrity (tests, ADRs), documentation sync, and release criteria. Must be pass/fail verifiable.
+
+### User Story
+A user-centric narrative format: "As a [persona], I want [action], so that [outcome]." Captures a feature from the user's perspective. Each story has Acceptance Criteria that make it testable. Stories trace back to personas and business goals.
+
+### Non-Functional Requirements (NFR)
+System constraints and quality attributes: performance (response time targets), security (authentication, compliance), scalability (user count, data volume), reliability (uptime SLAs, RTO/RPO), and accessibility (WCAG level). Defined in the PRD to give the RFD a design budget.
+
+### Status Flip
+The ceremony of changing a document's status from `Proposed` to `Accepted`. Tied to the PR approval event — a PR is approved, the status is flipped, then Squash and Merge. Prevents documents from lingering in "Proposed" indefinitely.
+
+### Lock Rule
+Requirements for a module are frozen once it enters the "NOW" column of the Roadmap. Prevents scope creep during active development. If a requirement change is needed after lock, it goes through a formal PR process with a new Status Flip.
+
+### KPI (Key Performance Indicator)
+A measurable value that tracks the success or impact of a delivered feature. Defined in the PRD context file. Examples: user adoption rate, response time p95, conversion funnel completion. Must be measurable without custom instrumentation.
+
+### Now/Next/Later
+A roadmap prioritization framework. **NOW** (🟢) — actively being designed or built, requirements are Locked. **NEXT** (🟡) — queued for the next cycle, high-level scope defined. **LATER** (⚪) — acknowledged but not scheduled, one-line descriptions only.
+
+### Superseded
+An ADR status indicating that a previous decision has been replaced by a new one. The superseded ADR is not deleted — it remains in the repository as historical context, with a link to the superseding ADR.
+
+### Depends On
+A dependency relationship between issues. Issue A depends on Issue B if A cannot start until B is complete. Documented in the issue's `Depends On` field or in the milestone's Execution Order sequence.
+
+### Self-Review
+The practice of reading through one's own "Files Changed" tab before requesting peer review. Catches typos, debug logs, commented-out code, and logic errors that the author can fix in seconds. The first line of quality defense.
+
+### Status Checks
+Automated CI validations (linting, tests, security scans, build verification) that must pass before a PR can be merged. Enforced via branch protection rulesets. No bypasses, no exceptions.
+
+### Conversation Resolution
+The requirement that all review comments on a PR must be explicitly resolved before merge. Ensures no feedback is ignored, no open question is forgotten, and every concern has been addressed (either fixed or explained).
+
+### Rulesets
+GitHub branch protection rules that enforce merge policies automatically: require PRs, require approvals, require status checks, require conversation resolution, and restrict merge strategies. The automated enforcement layer that makes branching discipline mandatory rather than aspirational.
+
+### Hotfix
+A critical production bug fix that may jump the queue ahead of the current roadmap. Still requires a PR, CI checks, and peer review — speed does not bypass quality. Branch prefix: `hotfix/`.
+
+---
+
+## UI & Design
+
+### Master Prompt
+A structured markdown specification that serves as both human-readable documentation and AI generation input. Includes screen purpose, component inventory, data contracts, interaction logic, and state specifications. Designed to be fed directly to AI UI generation tools.
+
+### Component Inventory
+A strict, enumerated list of every functional zone in a view (e.g., Global Search, Sidebar, Data Grid, Action Bar). Defines what each zone displays and its data source. Prevents ambiguity about what a view contains.
+
+### State Specification
+The explicit definition of all four UI states for every view: Initial/Empty (what the user sees before data), Loading (how progress is communicated), Error (how failures display), and Success (confirmation and next actions). No view is complete without all four states defined.
