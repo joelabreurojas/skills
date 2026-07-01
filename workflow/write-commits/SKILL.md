@@ -238,7 +238,7 @@ git log --oneline -5
 | [Squash Merge](standards/GLOSSARY.md#squash-merge) | Compresses branch commits into a single commit on `main` with PR context. | History strategy |
 | [Scope](standards/GLOSSARY.md#scope) | Free-form topic in commit message identifying the logical area changed (e.g., `sidebar`, `auth`). | Message anatomy |
 | [Breaking Change](standards/GLOSSARY.md#breaking-change) | Incompatible API or architectural change, signaled by `!` after the commit type. | SemVer signal |
-| [Semantic Versioning](standards/GLOSSARY.md#semantic-versioning-semver) | `MAJOR.MINOR.PATCH` scheme. Commits drive version bumps automatically. | Version strategy |
+| [Semantic Versioning](standards/GLOSSARY.md#semver-semantic-versioning) | `MAJOR.MINOR.PATCH` scheme. Commits drive version bumps automatically. | Version strategy |
 
 ---
 

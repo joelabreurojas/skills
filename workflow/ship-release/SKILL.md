@@ -178,7 +178,7 @@ The standard pipeline that gates every PR and release:
 
 | Term | Definition | Full Reference |
 |------|-----------|---------------|
-| [Semantic Versioning](standards/GLOSSARY.md#semantic-versioning-semver) | `MAJOR.MINOR.PATCH` scheme. Breaking = MAJOR, feature = MINOR, fix = PATCH. | Version communication |
+| [Semantic Versioning](standards/GLOSSARY.md#semver-semantic-versioning) | `MAJOR.MINOR.PATCH` scheme. Breaking = MAJOR, feature = MINOR, fix = PATCH. | Version communication |
 | [CHANGELOG](standards/GLOSSARY.md#changelog) | Human-readable log of notable changes organized by version. `[Unreleased]` accumulates until release. | Release documentation |
 | [Pipeline](standards/GLOSSARY.md#pipeline) | Automated CI/CD system that validates code. The gatekeeper — no release with failing CI. | Quality gate |
 | [Git Tag](standards/GLOSSARY.md#git-tag) | Pointer to a specific commit marking a release (e.g., `v1.2.0`). Required for every release. | Release marker |
@@ -195,8 +195,8 @@ The standard pipeline that gates every PR and release:
 
 **Downstream**:
 - `standards/apply-principles` — After a release, the cycle restarts: new issues, new branches, new decisions
-- `diagnose` — Post-release monitoring may trigger the diagnose skill for production issues
+- `tools/debug-code` — Post-release monitoring may trigger debug-code for production issues
 
 **Cross-cutting**: The release is the end of the implementation lifecycle. Every skill in the chain — from `standards/apply-principles` through `workflow/plan-issues`, `workflow/enforce-branch-flow`, `workflow/write-commits`, `workflow/log-adr`, and `workflow/create-pr` — converges here. The release is the proof that the entire process worked.
 
-**Handoff**: After Phase 6, the release is published. The cycle restarts with new issues, new branches, and new PRs. If production issues arise, hand off to `diagnose` for blameless investigation.
+**Handoff**: After Phase 6, the release is published. The cycle restarts with new issues, new branches, and new PRs. If production issues arise, hand off to `tools/debug-code` for blameless investigation.
