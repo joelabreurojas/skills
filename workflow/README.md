@@ -40,6 +40,6 @@ The workflow bucket follows the SSOT phased delivery model:
 ## Conventions
 
 - All skills follow the same structure: YAML frontmatter, philosophy, anti-patterns (≥3), workflow phases (≥3 with checklists), glossary, and chaining.
-- Cross-references use bucket-relative paths: `standards/`, `workflow/`, `ui/`, `tools/`.
+- Cross-references use bucket-relative paths: `standards/`, `workflow/`, `tools/`.
 - Glossary terms link to `standards/GLOSSARY.md` for full definitions.
 - Skills may be loaded independently or chained together via their `## Chaining` sections.

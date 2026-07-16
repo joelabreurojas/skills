@@ -274,7 +274,7 @@ Run all seven phases in order. Do not skip Phases 1 and 2 — they are the most 
 
 **Upstream**:
 - `standards/apply-principles` — SSOT philosophy and automation principles guide every initialization decision
-- `tools/spell-out` — Before scaffolding, spell out the project intent to ensure the structure matches the needs
+- [`spell-out`](EXTERNAL.md#matt-pocock-skills) (externa) — Before scaffolding, spell out the project intent to ensure the structure matches the needs
 
 **Downstream**:
 - `workflow/define-product` — After initialization, create the first PRD in `docs/PRD/`

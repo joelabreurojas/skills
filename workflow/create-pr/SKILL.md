@@ -253,7 +253,7 @@ Valid issue linking keywords:
 
 **Downstream**:
 - `workflow/ship-release` — Merged PRs drive changelog entries and semantic version bumps
-- `tools/pack-context` — PR context provides handoff information for session boundaries
+- [`pack-context`](EXTERNAL.md#matt-pocock-skills) (externa) — PR context provides handoff information for session boundaries
 
 **Cross-cutting**: The PR is the convergence point where planning (issues), implementation (commits), decisions (ADRs), and quality (CI) meet. Every PR must be self-contained — a reviewer should understand the change without reading anything outside the PR.
 

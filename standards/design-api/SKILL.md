@@ -206,7 +206,7 @@ Default to stateless system design:
 - `workflow/specify-solution` — API contracts are documented in RFD structure and interface sections
 - `standards/shift-left-security` — API security (authentication, CSRF, injection prevention) follows security standards
 - `standards/write-tests` — API contracts must be tested with integration and E2E tests
-- `standards/polish-ui` — API response design influences UI state transitions and loading patterns
+- [`polish-ui`](EXTERNAL.md#emil-kowalski-skills) (externa) — API response design influences UI state transitions and loading patterns
 - `workflow/create-pr` — API changes require peer review and CI validation
 
 **Cross-cutting**: API design decisions should be captured as ADRs when they involve technology choices (REST vs GraphQL, versioning strategy). See the `workflow/log-adr` skill.

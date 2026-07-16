@@ -2,31 +2,28 @@
 
 ## Purpose
 
-A curated collection of composable, LLM-first agent skills for professional software engineering. Built primarily from the **SSOT (Single Source of Truth)** engineering framework (19 chapters), with additions adapted from Matt Pocock's engineering skills and Emil Kowalski's design engineering philosophy. Designed for any coding agent — OpenCode, Claude Code, Cursor, GitHub Copilot.
+Original, composable LLM-first agent skills for professional software engineering by Joel Abreu Rojas. Based on the **SSOT (Single Source of Truth)** engineering framework. Designed for any coding agent — OpenCode, Claude Code, Cursor, GitHub Copilot.
 
-This repo is the central hub for all my agent skills. It started with SSOT as the backbone and will grow with original skills over time.
+This repo contains **only original skills**. Third-party skills (Matt Pocock, Emil Kowalski, Gentle AI) and plugins are documented in [`EXTERNAL.md`](EXTERNAL.md).
 
 ## Current State
 
-**Stable.** All 24 skills are authored, cross-referenced, and verified. Open to new skills as needs arise.
+**Stable.** 18 skills across 3 buckets, all authored and cross-referenced.
 
-- 24 skills across 4 buckets
-- 16 template files across 5 document types (SSOT-originated)
-- Shared glossary in `standards/GLOSSARY.md` (20+ terms)
-- Skill registry at `.atl/skill-registry.md` for OpenCode auto-loading
+- 18 skills across standards/, workflow/, tools/
+- 16 template files across 5 document types
+- Shared glossary in `standards/GLOSSARY.md` (30+ terms)
 
 ## Repository Structure
 
 ```
 skills/
-├── .atl/                    # OpenCode skill registry (auto-loaded)
-├── standards/               # 5 skills — quality gates, principles
+├── standards/               # 4 skills — quality gates, principles
 │   ├── GLOSSARY.md          # Shared terminology index
 │   ├── apply-principles/
 │   ├── design-api/
 │   ├── shift-left-security/
-│   ├── write-tests/
-│   └── polish-ui/
+│   └── write-tests/
 ├── workflow/                # 11 skills — engineering lifecycle
 │   ├── define-product/
 │   ├── plan-roadmap/
@@ -39,56 +36,39 @@ skills/
 │   ├── log-adr/
 │   ├── create-pr/
 │   └── ship-release/
-├── ui/                      # 2 skills — design engineering
-│   ├── design-animations/
-│   └── build-components/
-├── tools/                   # 6 skills — transversals
-│   ├── spell-out/
-│   ├── debug-code/
-│   ├── explain-code/
-│   ├── pack-context/
+├── tools/                   # 3 skills — transversals
 │   ├── init-repo/
-│   └── apply-template/
+│   ├── apply-template/
+│   └── sdd-model-assigner/
 ├── templates/               # 16 master template files
 │   ├── PRD/                 # 5 — Product Requirements Documents
 │   ├── RFD/                 # 6 — Request for Design (technical specs)
 │   ├── ADR/                 # 1 — Architecture Decision Records
 │   ├── VIEWS/               # 2 — Visual design specifications
 │   └── milestones/          # 2 — Milestone blueprints and issue tasks
+├── EXTERNAL.md              # Registry of third-party skills and plugins
 ├── AGENTS.md                # Agent instructions for this repo
 ├── CONTEXT.md               # This file
 └── README.md                # Human-facing index
 ```
 
-## Origins
-
-The skills come from three sources, plus original work:
-
-| Source | Author | Skills | Attribution |
-|--------|--------|--------|-------------|
-| **SSOT framework** | Joel Abreu Rojas | 17 across standards/, workflow/, tools/ | Primary reference; full lifecycle engineering |
-| **Matt Pocock** | Matt Pocock | 4 in tools/ | Adapted: debug-code, explain-code, pack-context, spell-out |
-| **Emil Kowalski** | Emil Kowalski | 3 in ui/ + standards/ | Adapted: design-animations, build-components, polish-ui |
-
-Each adapted skill has a `derived_from` field in its frontmatter linking back to the original work. Skills I author from scratch carry only my name.
-
 ## Lifecycle Flow
 
-The 16 standards + workflow skills implement a complete delivery pipeline:
+The 15 standards + workflow skills implement a complete delivery pipeline:
 
 ```
-/spell-out → /define-product → /plan-roadmap → /specify-solution
+/define-product → /plan-roadmap → /specify-solution
 → /design-views → /define-milestone → /plan-issues
 → /enforce-branch-flow → /write-commits → /log-adr
 → /create-pr → /apply-principles → /shift-left-security
-→ /polish-ui → /write-tests → /ship-release
+→ /write-tests → /ship-release
 ```
 
 ## Key Conventions
 
 ### Naming
 
-- **Verb-noun**: `define-product`, `write-commits`, `debug-code`
+- **Verb-noun**: `define-product`, `write-commits`
 - **No prefixes**: never `ssot-` or `gentle-`
 - **No underscores**: use hyphens
 - **Command-like**: the name reads as an action (`init-repo`, not `repo-init`)
@@ -105,6 +85,7 @@ The 16 standards + workflow skills implement a complete delivery pipeline:
 ### Cross-References
 
 - Skills reference each other by **bucket path**: `workflow/define-product`, `standards/apply-principles`
+- External skills are referenced via [`EXTERNAL.md`](EXTERNAL.md): `[skill](EXTERNAL.md#section) (externa)`
 - Glossary links use relative paths: `[Term](standards/GLOSSARY.md#term)`
 - Anchor slugs in GLOSSARY.md use lowercase-hyphenated term names
 - Every cross-reference must point to an existing directory — verify before adding
@@ -120,31 +101,34 @@ The 16 standards + workflow skills implement a complete delivery pipeline:
 
 When adding a new skill to this repo:
 
-1. Choose the right bucket (standards/, workflow/, ui/, tools/)
+1. Choose the right bucket (standards/, workflow/, tools/)
 2. Create a directory with the verb-noun name
 3. Write SKILL.md following the anatomy above
-4. Set `author` to yourself if it's original work, or use `derived_from` if adapted
+4. Set `author` to yourself
 5. Update cross-references in related skills
 6. Update this CONTEXT.md and AGENTS.md if the bucket structure or conventions change
-7. The `.atl/skill-registry.md` auto-loads for OpenCode — no manual registry update needed
+
+## External Skills Policy
+
+Third-party skills are not stored in this repo. They are documented in [`EXTERNAL.md`](EXTERNAL.md) with:
+- Source and author
+- Installation instructions
+- Purpose of each skill
+
+For a fresh install, follow the instructions in `EXTERNAL.md`.
 
 ## Evolution History
 
-This repository was restructured from a flat `engineering/` directory to the 4-bucket structure. The original SSOT chapters (19) were mapped to command-like skills:
-
-- 14 SSOT chapters → workflow + standards skills
-- 5 new skills authored: `plan-roadmap`, `define-milestone`, `polish-ui`, `spell-out`, `pack-context`
-- 3 Emil Kowalski design engineering skills: `design-animations`, `build-components` (plus `polish-ui`)
-- 2 merged from gentle-ai: `write-commits` (SDD integration), `create-pr` (CI checks)
-- 4 adapted from Matt Pocock: `debug-code`, `explain-code`, `pack-context`, `spell-out`
-- 6 tools skills for transversal concerns
+- **2026-05**: SSOT-to-Skills restructuring. 24 skills created from SSOT + Matt Pocock + Emil Kowalski.
+- **2026-06**: Full audit: 59 inconsistencies fixed, GLOSSARY.md expanded.
+- **2026-07**: Separated external skills. Repo now contains only original skills. Third-party skills moved to EXTERNAL.md.
 
 ## Versioning
 
-This repo does not use SemVer. Skills evolve independently. Breaking changes to a skill's interface (required inputs, workflow phases) are documented in the skill's frontmatter `version` field and noted in commit messages.
+This repo does not use SemVer. Skills evolve independently. Breaking changes to a skill's interface are documented in the `version` field in frontmatter and in commit messages.
 
 ## Dependencies
 
 - **OpenCode** (recommended): reads `.atl/skill-registry.md` for auto-loading
-- **Any agent**: load individual `SKILL.md` files by path
+- **Any agent**: can load individual `SKILL.md` files by path
 - **No runtime dependencies**: skills are pure markdown, no packages or build step

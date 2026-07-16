@@ -153,7 +153,7 @@ This skill is the **root** of the standards chain. It has no upstream parents.
 - `standards/design-api` — API design decisions are grounded in simplicity and documentation
 - `standards/write-tests` — Blameless culture depends on test safety nets
 - `standards/shift-left-security` — Automation principle enforces security checks in CI
-- `standards/polish-ui` — UI polish and animation principles inherit from simplicity and automation
+- [`polish-ui`](EXTERNAL.md#emil-kowalski-skills) (externa) — UI polish and animation principles inherit from simplicity and automation
 - `workflow/log-adr` — Significant technical decisions require ADR documentation
 - `workflow/write-commits` — Atomic building requires conventional commits
 - `workflow/create-pr` — Collective ownership requires peer review

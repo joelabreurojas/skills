@@ -3,7 +3,7 @@
 </h1>
 
 <p align='center'>
-    <em>A curated collection of composable, LLM-first agent skills for professional software engineering.</em>
+    <em>Original, composable LLM-first agent skills for professional software engineering.</em>
 </p>
 
 <h6 align='center'>
@@ -22,115 +22,93 @@
 
 ### ✨ Overview
 
-24 composable, LLM-first agent skills for OpenCode, Claude Code, Cursor, or any coding agent. Curated from three sources:
+**18** original skills for OpenCode, Claude Code, Cursor, or any coding agent. Authored by [Joel Abreu Rojas](https://github.com/joelabreurojas) based on the **SSOT** engineering framework.
 
-| Source | Author | Skills |
-|--------|--------|--------|
-| **SSOT** engineering framework | Joel Abreu Rojas | 17 — standards, workflow, tools |
-| Matt Pocock's engineering skills | Matt Pocock | 4 — debug, explain, pack, spell |
-| Emil Kowalski's design engineering | Emil Kowalski | 3 — animations, components, UI polish |
+> [!NOTE]
+> Third-party skills (Matt Pocock, Emil Kowalski, Gentle AI) and plugins are documented in [`EXTERNAL.md`](EXTERNAL.md). This repo contains only original skills.
 
 **These skills help agents to:**
 - Bootstrap projects with `init-repo` — AGENTS.md, CONTEXT.md, templates, CI/CD
 - Define products with `define-product` — PRDs from vision to success metrics
 - Design solutions with `specify-solution` — RFDs for structure, data, interfaces, ops
 - Maintain quality with `apply-principles`, `write-tests`, `shift-left-security`
-- Debug systematically with `debug-code` — reproduce, instrument, fix, regress
 - Ship releases with `create-pr`, `ship-release` — PR lifecycle and SemVer automation
-- ...and 18 more!
+- ...and 12 more!
 
 &nbsp;
 
 ### 🚀 Quickstart
 
-To use these skills in your project:
+```bash
+# Install skills
+cp -r standards/* ~/.config/opencode/skills/
+cp -r workflow/* ~/.config/opencode/skills/
+cp -r tools/* ~/.config/opencode/skills/
+cp standards/GLOSSARY.md ~/.config/opencode/skills/standards/
 
-1. **Install** the skills with the `skills` CLI:
-   ```bash
-   npx skills@latest add <tu-usuario>/skills
-   ```
-2. **Initialize** your project:
-   ```bash
-   /init-repo
-   ```
-3. The agent reads `CONTEXT.md` and knows which commands to use in each phase.
-
-> [!NOTE]
-> If you use OpenCode, skills are auto-loaded from `.atl/skill-registry.md`. No manual install needed.
+# Refresh registry
+gentle-ai skill-registry refresh --force
+```
 
 &nbsp;
 
 ### 📦 Skills
 
-The repository is organized into four buckets:
-
 <div align="center">
 
 | Bucket | Skills | Focus |
 |--------|-------|-------|
-| **`standards/`** | 5 | Quality gates, principles, security, testing, UI polish |
+| **`standards/`** | 4 | Quality gates, principles, security, testing |
 | **`workflow/`** | 11 | Engineering lifecycle: from PRD to release |
-| **`ui/`** | 2 | Component implementation and animation design |
-| **`tools/`** | 6 | Transversal: debug, explain, context pack, init, templates |
+| **`tools/`** | 3 | Transversal: init, templates, model assignment |
 
 </div>
 
 #### 📐 Standards
 
-| Command | Description |
-|---------|------------|
-| `/apply-principles` | Apply the 8 SSOT pillars to engineering decisions |
-| `/design-api` | Design REST APIs with versioning, idempotency, error envelopes |
-| `/shift-left-security` | End-to-end security: PoLP, OWASP, secrets, supply chain |
-| `/write-tests` | Test pyramid, AAA, TDD, coverage, flaky triage |
-| `/polish-ui` | UI audit: performance, accessibility, blur, transforms |
+| Skill | Description |
+|-------|-------------|
+| [`apply-principles`](standards/apply-principles/) | Apply the 8 SSOT pillars to engineering decisions |
+| [`design-api`](standards/design-api/) | Design REST APIs with versioning, idempotency, error envelopes |
+| [`shift-left-security`](standards/shift-left-security/) | End-to-end security: PoLP, OWASP, secrets, supply chain |
+| [`write-tests`](standards/write-tests/) | Test pyramid, AAA, TDD, coverage, flaky triage |
 
 #### 🔄 Workflow
 
-| Command | Description |
-|---------|------------|
-| `/define-product` | Full PRD lifecycle: vision, stories, requirements |
-| `/plan-roadmap` | Now/Next/Later, JIT design gate, sequencing |
-| `/specify-solution` | Full RFD lifecycle: data model, interface, ops |
-| `/design-views` | UI specs with 4 states (empty/loading/error/success) |
-| `/define-milestone` | Epics, Definition of Done, vertical slice progression |
-| `/plan-issues` | Atomic decomposition with execution order |
-| `/enforce-branch-flow` | Repo settings, naming, one-issue-per-branch, hygiene |
-| `/write-commits` | Conventional Commits, atomic discipline, history review |
-| `/log-adr` | Architecture Decision Records with status flip |
-| `/create-pr` | PR lifecycle: self-review, peer review, squash merge |
-| `/ship-release` | SemVer, CHANGELOG, CI gates, tagging |
-
-#### 🎨 UI
-
-| Command | Description |
-|---------|------------|
-| `/design-animations` | Decision framework: easing, timing, springs, clip-path |
-| `/build-components` | Component principles: buttons, popovers, tooltips |
+| Skill | Description |
+|-------|-------------|
+| [`define-product`](workflow/define-product/) | Full PRD lifecycle: vision, stories, requirements |
+| [`plan-roadmap`](workflow/plan-roadmap/) | Now/Next/Later, JIT design gate, sequencing |
+| [`specify-solution`](workflow/specify-solution/) | Full RFD lifecycle: data model, interface, ops |
+| [`design-views`](workflow/design-views/) | UI specs with 4 states (empty/loading/error/success) |
+| [`define-milestone`](workflow/define-milestone/) | Epics, Definition of Done, vertical slice progression |
+| [`plan-issues`](workflow/plan-issues/) | Atomic decomposition with execution order |
+| [`enforce-branch-flow`](workflow/enforce-branch-flow/) | Repo settings, naming, one-issue-per-branch, hygiene |
+| [`write-commits`](workflow/write-commits/) | Conventional Commits, atomic discipline, history review |
+| [`log-adr`](workflow/log-adr/) | Architecture Decision Records with status flip |
+| [`create-pr`](workflow/create-pr/) | PR lifecycle: self-review, peer review, squash merge |
+| [`ship-release`](workflow/ship-release/) | SemVer, CHANGELOG, CI gates, tagging |
 
 #### 🧰 Tools
 
-| Command | Description |
-|---------|------------|
-| `/spell-out` | Review and challenge the plan before designing |
-| `/debug-code` | Debug loop: reproduce → hypothesize → fix |
-| `/explain-code` | Explain code in system context |
-| `/pack-context` | Compact session context for handoff |
-| `/init-repo` | Bootstrap project: AGENTS.md, CONTEXT.md, structure, templates |
-| `/apply-template` | Template reference for PRD/RFD/ADR/Views/Milestones |
+| Skill | Description |
+|-------|-------------|
+| [`init-repo`](tools/init-repo/) | Bootstrap project: AGENTS.md, CONTEXT.md, structure, templates |
+| [`apply-template`](tools/apply-template/) | Template reference for PRD/RFD/ADR/Views/Milestones |
+| [`sdd-model-assigner`](tools/sdd-model-assigner/) | Discover free models, assign to SDD phases and JD agents, handle quota exhaustion |
 
 &nbsp;
 
 ### 🔗 Lifecycle
 
-The 16 standards + workflow skills form a complete delivery pipeline:
+The 15 standards + workflow skills form a complete delivery pipeline:
 
 ```
-/spell-out → /define-product → /plan-roadmap → /specify-solution
+/define-product → /plan-roadmap → /specify-solution
 → /design-views → /define-milestone → /plan-issues
 → /enforce-branch-flow → /write-commits → /log-adr
 → /create-pr → /apply-principles → /shift-left-security
-→ /polish-ui → /write-tests → /ship-release
+→ /write-tests → /ship-release
 ```
 
 &nbsp;
@@ -151,24 +129,25 @@ Installed into target projects by `init-repo`.
 
 &nbsp;
 
-### 🏷️ Origins
+### 📌 External Skills
 
-These skills are adapted from three bodies of work:
+Third-party skills I use but do not store in this repo:
 
-- **SSOT** — Joel Abreu Rojas's opinionated engineering framework: 19 chapters covering the full development lifecycle, from product definition through design, execution, and delivery.
-- **Matt Pocock's skills** — Real-world engineering skills from a decade of professional TypeScript and full-stack development. Adapted: `debug-code`, `explain-code`, `pack-context`, `spell-out`.
-- **Emil Kowalski's design engineering** — Purposeful animation and component design philosophy. Adapted: `design-animations`, `build-components`, `polish-ui`.
-
-Each adapted skill carries a `derived_from` field in its frontmatter linking back to the original work.
+| Source | Skills | Registry |
+|--------|--------|----------|
+| **Gentle AI** | go-testing, branch-pr, chained-pr, issue-creation, judgment-day, work-unit-commits, cognitive-doc-design, comment-writer, skill-creator, skill-improver, skill-registry + 11 SDD | [`EXTERNAL.md`](EXTERNAL.md#gentle-ai-suite) |
+| **Matt Pocock** | debug-code, explain-code, pack-context, spell-out | [`EXTERNAL.md`](EXTERNAL.md#matt-pocock-skills) |
+| **Emil Kowalski** | polish-ui, build-components, design-animations | [`EXTERNAL.md`](EXTERNAL.md#emil-kowalski-skills) |
+| **Plugins** | ponytail, video-use, graphify | [`EXTERNAL.md`](EXTERNAL.md#plugins) |
 
 &nbsp;
 
 ### 📌 What This Is NOT
 
-- **NOT a project framework.** These skills teach workflows — they don't replace your project's `opencode.json` or CI/CD. That's what `init-repo` bootstraps.
-- **NOT language-specific.** The skills are technology-agnostic. They work for Go backends, React frontends, or embedded systems.
-- **NOT a passive reference.** Each skill has actionable phases with checklists. Skills are meant to be executed, not just read.
-- **NOT a replacement for judgment.** Skills encode best practices but don't replace human decision-making. Use them as a force multiplier, not a crutch.
+- **NOT a project framework.** These skills teach workflows — they don't replace your project's `opencode.json` or CI/CD.
+- **NOT language-specific.** Skills are technology-agnostic. Works for Go backends, React frontends, or embedded systems.
+- **NOT a passive reference.** Each skill has actionable phases with checklists. Meant to be executed, not just read.
+- **NOT a replacement for judgment.** Skills encode best practices but don't replace human decision-making.
 
 &nbsp;
 

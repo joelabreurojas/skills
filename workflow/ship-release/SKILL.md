@@ -195,8 +195,8 @@ The standard pipeline that gates every PR and release:
 
 **Downstream**:
 - `standards/apply-principles` — After a release, the cycle restarts: new issues, new branches, new decisions
-- `tools/debug-code` — Post-release monitoring may trigger debug-code for production issues
+- [`debug-code`](EXTERNAL.md#matt-pocock-skills) (externa) — Post-release monitoring may trigger debug-code for production issues
 
 **Cross-cutting**: The release is the end of the implementation lifecycle. Every skill in the chain — from `standards/apply-principles` through `workflow/plan-issues`, `workflow/enforce-branch-flow`, `workflow/write-commits`, `workflow/log-adr`, and `workflow/create-pr` — converges here. The release is the proof that the entire process worked.
 
-**Handoff**: After Phase 6, the release is published. The cycle restarts with new issues, new branches, and new PRs. If production issues arise, hand off to `tools/debug-code` for blameless investigation.
+**Handoff**: After Phase 6, the release is published. The cycle restarts with new issues, new branches, and new PRs. If production issues arise, hand off to [`debug-code`](EXTERNAL.md#matt-pocock-skills) (externa) for blameless investigation.
